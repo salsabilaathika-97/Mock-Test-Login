@@ -21,12 +21,8 @@ const ModalCreate = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control placeholder="Write your title here.." autoFocus/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Text</Form.Label>
-                            <Form.Control as = "textarea" rows={4} placeholder="Write your text here.."/>
+                            <Form.Control placeholder="Write your to-do here.." autoFocus/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
