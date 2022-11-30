@@ -6,12 +6,12 @@ const Navigation = () => {
         <Navbar bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand>
-                    Welcome.
+                    Welcome, User.
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        Login as: <a href="#">User</a>
+                        <a href = "#home">Logout</a>
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Container>
