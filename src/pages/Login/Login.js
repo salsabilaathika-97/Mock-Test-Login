@@ -6,6 +6,7 @@ import { handleLogin } from "../../redux/actions/authAction";
 
 const Login = () => {
     const [username, setUsername] = useState("");
+    const [errMsg, setErrMsg] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -15,7 +16,8 @@ const Login = () => {
         const payload = {
             username,
         };
-        dispatch(handleLogin(payload, navigate))
+        console.log(payload);
+        dispatch(handleLogin(payload, setErrMsg, navigate));
     }
     return (
         <div>

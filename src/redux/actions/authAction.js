@@ -3,31 +3,41 @@ import TYPES from "../types";
 import swal from "sweetalert"
 
 export const handleLogin = (payload, setErrMsg, navigate) => {
-    return(dispatch) => {
+    return (dispatch) => {
         axios
-        .post("https://jsonplaceholder.typicode.com/users", payload)
-        .then((res) => {
-            console.log(res);
-            dispatch({
-                type: TYPES.POST_LOGIN,
+            .get("https://jsonplaceholder.typicode.com/users?username=" + payload.username)
+            .then((res) => {
+                console.log("LOGGED USER ", res.data);
+                if (res.data.length > 0) {
+                    let userdata = res.data[0];
+                    dispatch({
+                        type: TYPES.POST_LOGIN,
+                        payload: userdata
+                    });
+                    swal({
+                        title: "Welcome!",
+                        text: "Logged in as " + userdata.name,
+                        icon: "success",
+                        timer: 1500,
+                    });
+                    navigate("/home");
+                } else {
+                    swal({
+                        title: 'Error!',
+                        text: 'Username not registered',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            })
+            .catch((err) => {
+                console.error("ERROR | ", err);
+                swal.fire({
+                    title: 'Error!',
+                    text: 'Sorry, error from server',
+                    icon: 'error',
+                    confirmButtonText: 'CKP TW'
+                });
             });
-        swal({
-            title: "Welcome!",
-            text: "Logged in successfully",
-            icon: "success",
-            timer: 1500,
-        });
-        navigate("/home")
-        })
-        .catch((err) => {
-            console.log(err);
-            if (err.response?.status === 404) {
-                setErrMsg(true);
-              } else if (err.response?.status === 400) {
-                setErrMsg(true);
-              } else {
-                setErrMsg("Login Failed");
-              }
-        });
     }
 }
