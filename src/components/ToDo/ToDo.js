@@ -11,7 +11,7 @@ const ToDo = () => {
 
     useEffect(() => {
         dispatch(getData());
-    })
+    }, []);
 
     return (
         <div>
