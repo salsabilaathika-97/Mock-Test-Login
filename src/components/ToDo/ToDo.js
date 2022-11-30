@@ -1,4 +1,5 @@
 import Card from 'react-bootstrap/Card'
+import ModalEdit from './ModalEdit/ModalEdit';
 
 const ToDo = () => {
     return (
@@ -10,10 +11,11 @@ const ToDo = () => {
                 <Card.Text>
                     Some quick example text to build on the card title and make up the bulk of the card's content.
                 </Card.Text>
-                <Card.Link href="#">Edit</Card.Link>
+                <ModalEdit />
                 <Card.Link href="#">Delete</Card.Link>
             </Card.Body>
         </Card>
+
     )
 }
 
