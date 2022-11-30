@@ -1,24 +1,42 @@
 import react from "react";
-import './Login.css'
+import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 
 const Login = () => {
     return (
-        <div class="login-page">
-            <div class="form">
-                <form class="register-form">
-                    <input type="text" placeholder="name"/>
-                    <input type="password" placeholder="password"/>
-                    <input type="text" placeholder="email address"/>
-                    <button>create</button>
-                    <p class="message">Already registered? <a href="#">Sign In</a></p>
-                    </form>
-                    <form class="login-form">
-                    <input type="text" placeholder="username"/>
-                    <input type="password" placeholder="password"/>
-                    <button>login</button>
-                    <p class="message">Not registered? <a href="#">Create an account</a></p>
-                </form>
-            </div>
+        <div>
+            <Container>
+                <Row className="vh-100 d-flex justify-content-center align-items-center">
+                    <Col md = {8} lg={6} xs={12}>
+                        <Card className="shadow">
+                            <Card.Body>
+                                <div className="mb-3 mt-md-4">
+                                    <h2 className="fw-bold mb-2 text-uppercase">Welcome</h2>
+                                    <p className="mb-5">Please enter your email and password</p>
+                                    <div className="mb-3">
+                                        <Form>
+                                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                <Form.Label className="text-center">
+                                                    Email address
+                                                </Form.Label>
+                                                <Form.Control type="email" placeholder="Enter email" />
+                                            </Form.Group>
+                                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                                <Form.Label>Password</Form.Label>
+                                                <Form.Control type="password" placeholder="Password" />
+                                            </Form.Group>
+                                            <div className="d-grid">
+                                                <Button variant="primary" type="submit">
+                                                Login
+                                                </Button>
+                                            </div>
+                                        </Form>
+                                    </div>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }
