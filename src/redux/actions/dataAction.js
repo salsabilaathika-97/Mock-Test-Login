@@ -8,6 +8,7 @@ export const getData = () => (dispatch) => {
         console.log(res.data);
         dispatch({
             type: TYPES.GET_DATA,
+            payload: res.data,
         })
     })
     .catch((err) => console.log(err))
