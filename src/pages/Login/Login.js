@@ -1,7 +1,22 @@
-import react from "react";
+import react, {useState} from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import { handleLogin } from "../../redux/actions/authAction";
 
 const Login = () => {
+    const [username, setUsername] = useState("");
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const payload = {
+            username,
+        };
+        dispatch(handleLogin(payload, navigate))
+    }
     return (
         <div>
             <Container>
@@ -11,18 +26,14 @@ const Login = () => {
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
                                     <h2 className="fw-bold mb-2 text-uppercase">Welcome</h2>
-                                    <p className="mb-5">Please enter your email and password</p>
+                                    <p className="mb-5">Please enter your username</p>
                                     <div className="mb-3">
-                                        <Form>
+                                        <Form onSubmit={handleSubmit}>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label className="text-center">
-                                                    Email address
+                                                    Username
                                                 </Form.Label>
-                                                <Form.Control type="email" placeholder="Enter email" />
-                                            </Form.Group>
-                                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                                <Form.Label>Password</Form.Label>
-                                                <Form.Control type="password" placeholder="Password" />
+                                                <Form.Control placeholder="Enter username" onChange={(e) => setUsername(e.target.value)} value={username} required />
                                             </Form.Group>
                                             <div className="d-grid">
                                                 <Button variant="primary" type="submit">
