@@ -20,7 +20,7 @@ export const handleLogin = (payload, navigate) => {
                             title: "Welcome!",
                             text: "Logged in as " + userdata.name,
                             icon: "success",
-                            timer: 1500,
+                            timer: 3000,
                         });
                         navigate("/home");
                     });
