@@ -26,7 +26,7 @@ const ToDo = () => {
                     title: "Deleted!",
                     text: "Successfully Deleted Data",
                     icon: "success",
-                    timer: 2000,
+                    timer: 3000,
                 })
             }
         })
