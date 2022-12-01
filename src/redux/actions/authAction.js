@@ -1,8 +1,9 @@
 import axios from "axios";
 import TYPES from "../types";
 import swal from "sweetalert"
+import { storeData } from "../../customLocalStorage";
 
-export const handleLogin = (payload, setErrMsg, navigate) => {
+export const handleLogin = (payload, navigate) => {
     return (dispatch) => {
         axios
             .get("https://jsonplaceholder.typicode.com/users?username=" + payload.username)
@@ -10,17 +11,19 @@ export const handleLogin = (payload, setErrMsg, navigate) => {
                 console.log("LOGGED USER ", res.data);
                 if (res.data.length > 0) {
                     let userdata = res.data[0];
-                    dispatch({
-                        type: TYPES.POST_LOGIN,
-                        payload: userdata
+                    storeData('userData', userdata).then(() => {
+                        dispatch({
+                            type: TYPES.POST_LOGIN,
+                            payload: userdata
+                        });
+                        swal({
+                            title: "Welcome!",
+                            text: "Logged in as " + userdata.name,
+                            icon: "success",
+                            timer: 1500,
+                        });
+                        navigate("/home");
                     });
-                    swal({
-                        title: "Welcome!",
-                        text: "Logged in as " + userdata.name,
-                        icon: "success",
-                        timer: 1500,
-                    });
-                    navigate("/home");
                 } else {
                     swal({
                         title: 'Error!',

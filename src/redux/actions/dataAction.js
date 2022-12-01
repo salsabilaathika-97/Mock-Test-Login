@@ -13,3 +13,16 @@ export const getData = () => (dispatch) => {
     })
     .catch((err) => console.log(err))
 }
+
+export const getDataByUserId = (userId) => (dispatch) => {
+    axios
+    .get(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
+    .then((res) => {
+        console.log(res.data);
+        dispatch({
+            type: TYPES.GET_DATA,
+            payload: res.data,
+        })
+    })
+    .catch((err) => console.log(err))
+}

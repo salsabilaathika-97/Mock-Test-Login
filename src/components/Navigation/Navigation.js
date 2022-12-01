@@ -1,17 +1,37 @@
+import { Button } from 'react-bootstrap'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
+import {useSelector, useDispatch} from "react-redux"
+import { useNavigate } from 'react-router'
+import { storeData } from '../../customLocalStorage'
+import swal from "sweetalert"
+import TYPES from "../../redux/types"
 
 const Navigation = () => {
+    const {userData} = useSelector((state)=> state);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        swal({
+            title: "Logout",
+            text: "Logout Berhasil",
+            icon: "success",
+            timer: 1500,
+        }).then(() => {
+            navigate("/");
+        });
+    }
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand>
-                    Welcome, User.
+                    Welcome, {userData.name}.
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        <a href = "#home">Logout</a>
+                        <Button variant='warning' onClick={handleLogout}>Logout</Button>
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Container>

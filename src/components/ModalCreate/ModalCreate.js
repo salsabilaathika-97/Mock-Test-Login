@@ -1,21 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { CreateData } from './CreateData';
 import {useNavigate} from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { getData } from '../../customLocalStorage';
+import TYPES from '../../redux/types';
 
 const ModalCreate = () => {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {setShow(false)};
     const handleOpen = () => setShow(true);
     const [title, setTitle] = useState("");
+    const {userData} = useSelector((state)=> state);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if(!userData.id){
+            getData('userData').then((val) => {
+                dispatch({
+                    type: TYPES.POST_LOGIN,
+                    payload: val
+                });
+            })
+        }
+    }, [dispatch, userData]);
+
     const handleCreateData = () => {
-        const data = new FormData()
-        CreateData(data, navigate)
+        let createData = {
+            userId: userData.id,
+            title: title,
+            completed: false
+        };
+        CreateData(createData, handleClose,navigate);
     }
 
     return (
@@ -29,7 +49,7 @@ const ModalCreate = () => {
                     <Modal.Title>Create a new to-do list</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form id="form-create">
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Text</Form.Label>
                             <Form.Control onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="Write your to-do here.." autoFocus/>

@@ -1,4 +1,4 @@
-import react, {useState} from "react";
+import {useState} from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -6,7 +6,6 @@ import { handleLogin } from "../../redux/actions/authAction";
 
 const Login = () => {
     const [username, setUsername] = useState("");
-    const [errMsg, setErrMsg] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ const Login = () => {
             username,
         };
         console.log(payload);
-        dispatch(handleLogin(payload, setErrMsg, navigate));
+        dispatch(handleLogin(payload, navigate));
     }
     return (
         <div>
