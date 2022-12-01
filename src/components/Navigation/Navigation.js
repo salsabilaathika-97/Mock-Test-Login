@@ -16,7 +16,7 @@ const Navigation = () => {
             title: "Logout",
             text: "Logout Berhasil",
             icon: "success",
-            timer: 1500,
+            timer: 3000,
         }).then(() => {
             navigate("/");
         });
